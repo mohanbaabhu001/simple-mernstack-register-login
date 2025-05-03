@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - cd view
+      - echo Installing frontend dependencies...
+      - npm install
+      - echo Building APP
+      - npm run build
+      - cp appspec.yml dist/
+      - chmod -R +x scripts/
+      - cp -r scripts/ dist/
+      
+artifacts:
+  files:
+    - '**/*'
+  base-directory: view/dist
+  name: dist.zip
